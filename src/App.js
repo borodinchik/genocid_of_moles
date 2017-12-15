@@ -20,8 +20,17 @@ componentDidMount(){
     this.setState({key:this.state.key + 1})
   },1000);
 }
+
   _handle() {
-    console.log('asdasdas');
+    var num = 1;
+    // var result = num = true?num=num + 1:"Error";
+    if (num = 1) {
+      num == num + 1;
+     console.log(num);
+    }else{
+      console.log('Error!');
+    }
+
   }
   _renderBlocks() {
     let colored = Math.floor(Math.random() * this.props.max + this.props.min);
