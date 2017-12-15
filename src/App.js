@@ -1,33 +1,60 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import Block from './Block';
 
 class App extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      key : 0
+    };
+  }
+  static defaultProps = {
+    min: 0,
+    max: 5
+  }
+
+componentDidMount(){
+  setInterval(() => {
+    this.setState({key:this.state.key + 1})
+  },1000);
+}
+  _handle() {
+    console.log('asdasdas');
+  }
+  _renderBlocks() {
+    let colored = Math.floor(Math.random() * this.props.max + this.props.min);
+    let blocks = [];
+
+    for(let i = this.props.min; i <= this.props.max; i++) {
+      if (i == colored) {
+        blocks.push(<Block key={i} handler={() => this._handle()} color={"red"}/>);
+      } else {
+
+        blocks.push(<Block key={i} />);
+      }
+    }
+    return blocks;
+  }
+
   render() {
-    console.log(this.props.testStore);
-    var min = 0;
-    var max = 5;
-    var rand = Math.floor(Math.random() * max + min);
-    console.log('Random number', rand);
+
+    console.log(this.state);
+
+    let blocks = this._renderBlocks();
+
     return (
-      <div className="container">
-      <div className="row">
-        <div className="col-xs-6 col-md-4" style={this.props.testStore}></div>
-        <div className="col-xs-6 col-md-4"></div>
-        <div className="col-xs-6 col-md-4" ></div>
-        </div>
-        <div className="row">
-          <div className="col-xs-6 col-md-4"></div>
-          <div className="col-xs-6 col-md-4"></div>
-          <div className="col-xs-6 col-md-4"></div>
-          </div>
+      <div style={{width: "50%"}}>
+      {blocks}
       </div>
     );
   }
 }
-
-export default connect(
-  state => ({
-    testStore: state
-  }),
-  display => ({})
-)(App);
+export default App;
+// export default connect(
+//   state => ({
+//     testStore: state
+//   }),
+//   display => ({})
+// )(App);
