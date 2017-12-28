@@ -3,6 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import Block from './Block';
 import { success } from './actions/index';
+import TableInfo from './components/TableInfo';
 
 
 class App extends Component {
@@ -42,10 +43,16 @@ _renderBlocks() {
 
 render() {
   let blocks = this._renderBlocks();
+
     return (
-      <div style={{width: "50%"}}>
-        {blocks}
-      </div>
+      <div>
+        <div style={{width: "50%"}}>
+          {blocks}
+        </div>
+        <div className="result">
+          <TableInfo props={this.props.successClicks}/>
+        </div>
+     </div>
     );
   }
 }
