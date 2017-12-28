@@ -6,23 +6,18 @@ import App from '../App';
 
 
 class TableInfo extends Component {
+  // var clickPoints = this.props.successClicks;
 
 render() {
-  console.log(this.props.successClicks);
-  if (this.props.successClicks >= 10) {
-    alert('New level');
-
-  }
-
-    return (
+return (
       <div className="container">
         <h3>Убито:{this.props.successClicks}</h3>
-        <h3>Уровень:</h3>
       </div>
     );
 
   }
 }
+
 function mapStateToProps(state) {
   return {
 
@@ -30,6 +25,7 @@ function mapStateToProps(state) {
   }
 
 }
+
 function mapDispatchToProps(dispatch) {
   return {
     handle: () => dispatch(success())

@@ -7,8 +7,9 @@ import App from './App';
 
 const store = createStore(allReducer,window.__REDUX_DEVTOOLS_EXTENSION__
   && window.__REDUX_DEVTOOLS_EXTENSION__());
-const bodySelector = document.querySelector('#root');
+
+const rootId = document.querySelector('#root');
 ReactDOM.render(
   <Provider store={store} >
   <App />
-  </Provider>,bodySelector)
+  </Provider>,rootId)

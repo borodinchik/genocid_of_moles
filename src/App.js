@@ -14,7 +14,6 @@ class App extends Component {
     };
   }
 
-
 static defaultProps = {
     min: 0,
     max: 5
@@ -43,6 +42,21 @@ _renderBlocks() {
 
 render() {
   let blocks = this._renderBlocks();
+  let clickPoints = this.props.successClicks;
+    switch (clickPoints) {
+      case 10:
+          alert('Level 1');
+        break;
+      case 20:
+          alert('Level 2');
+        break;
+      case 30:
+          alert('Level 3');
+        break;
+      case 40:
+          alert('Ты начал массовый геноцид кротов');
+        break;
+    }
 
     return (
       <div>
