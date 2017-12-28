@@ -10,7 +10,7 @@ class TableInfo extends Component {
 
 render() {
 return (
-      <div className="container">
+      <div>
         <h3>Убито:{this.props.successClicks}</h3>
       </div>
     );

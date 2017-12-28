@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import Block from './Block';
 import { success } from './actions/index';
 import TableInfo from './components/TableInfo';
+import './style.css';
+
 
 
 class App extends Component {
@@ -24,14 +26,23 @@ componentDidMount(){
     this.setState({key:this.state.key + 1})
   },4000);
 }
+handleLevel= () => {
+  let {successClicks,level,delay,countClickLevel} = this.props;
 
+
+  console.log('click:',successClicks);
+  console.log('Level:',level);
+  console.log('delay',delay);
+  console.log('countClickLevel',countClickLevel);
+  this.props.handle()
+}
 _renderBlocks() {
   let colored = Math.floor(Math.random() * this.props.max + this.props.min);
   let blocks = [];
 
     for(let i = this.props.min; i <= this.props.max; i++) {
       if (i == colored) {
-        blocks.push(<Block  key={i} handler={this.props.handle} color={"red"}/>);
+        blocks.push(<Block  key={i} handler={this.handleLevel} color={"red"}/>);
 
       } else {
         blocks.push(<Block key={i} />);
@@ -42,39 +53,29 @@ _renderBlocks() {
 
 render() {
   let blocks = this._renderBlocks();
-  let clickPoints = this.props.successClicks;
-    switch (clickPoints) {
-      case 10:
-          alert('Level 1');
-        break;
-      case 20:
-          alert('Level 2');
-        break;
-      case 30:
-          alert('Level 3');
-        break;
-      case 40:
-          alert('Ты начал массовый геноцид кротов');
-        break;
-    }
-
-    return (
+  return (
       <div>
+      <div className="container right">
         <div style={{width: "50%"}}>
           {blocks}
         </div>
-        <div className="result">
-          <TableInfo props={this.props.successClicks}/>
-        </div>
+
+     </div>
+     <div className="result">
+       <TableInfo />
+     </div>
      </div>
     );
   }
 }
 
 function mapStateToProps(state) {
-  return {
 
-    successClicks: state.app.successedClicks
+  return {
+      successClicks: state.app.successedClicks,
+      level: state.app.level,
+      delay: state.app.delay,
+      countClickLevel: state.app.countClickLevel
   }
 
 }
