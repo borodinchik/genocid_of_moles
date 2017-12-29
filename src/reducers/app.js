@@ -8,9 +8,17 @@ const initialState = {
 export default function (state = initialState, action) {
   switch (action.type) {
     case 'SUCCESS_CLICK':
-    console.log(action.payload);
-      return {...state, successedClicks: state.successedClicks + 1};
+      return {...state
+      };
+      case 'SUCCESS_LEVEL':
+        return {...state,
+            level: state.level + 1,
+            dalay: state.delay  - 1000
+        };
+
+        break;
       default:
+      console.log(state);
     return state;
   }
 }

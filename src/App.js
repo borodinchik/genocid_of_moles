@@ -3,6 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import Block from './Block';
 import { success } from './actions/index';
+import { successLevel } from './actions/successLevel';//successLevel
 import TableInfo from './components/TableInfo';
 import './style.css';
 
@@ -22,18 +23,25 @@ static defaultProps = {
 componentDidMount(){
   setInterval(() => {
     this.setState({key:this.state.key + 1})
-  },4000);
+  },this.props.delay);
 }
+
+
 handleLevel= () => {
   let {successedClicks,level,delay,countClickLevel} = this.props;
+    if (successedClicks >= 9) {
+        this.props.lvlSuccess({level,delay});
+        return;
+    }
 
-
+    // this.props.success();
   console.log('click:',successedClicks);
-  console.log('Level:',level);
+  console.log('Level:', level);
   console.log('delay',delay);
   console.log('countClickLevel',countClickLevel);
-  this.props.handle({successedClicks,level,delay,countClickLevel});
+  this.props.handle({successedClicks});
 }
+
 _renderBlocks() {
   let colored = Math.floor(Math.random() * this.props.max + this.props.min);
   let blocks = [];
@@ -50,6 +58,7 @@ _renderBlocks() {
 
 render() {
   let blocks = this._renderBlocks();
+
   return (
       <div>
       <div className="container right">
@@ -77,7 +86,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    handle: (app) => dispatch(success(app))
+    handle: (app) => dispatch(success(app)),
+    lvlSuccess: (app) => dispatch(successLevel(app))
   }
 }
 
