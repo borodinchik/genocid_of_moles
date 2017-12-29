@@ -13,4 +13,4 @@ const rootId = document.querySelector('#root');
 ReactDOM.render(
   <Provider store={store} >
   <App />
-  </Provider>,rootId)
+  </Provider>, rootId)

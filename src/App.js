@@ -6,8 +6,6 @@ import { success } from './actions/index';
 import TableInfo from './components/TableInfo';
 import './style.css';
 
-
-
 class App extends Component {
   constructor(props) {
     super(props);
@@ -27,14 +25,14 @@ componentDidMount(){
   },4000);
 }
 handleLevel= () => {
-  let {successClicks,level,delay,countClickLevel} = this.props;
+  let {successedClicks,level,delay,countClickLevel} = this.props;
 
 
-  console.log('click:',successClicks);
+  console.log('click:',successedClicks);
   console.log('Level:',level);
   console.log('delay',delay);
   console.log('countClickLevel',countClickLevel);
-  this.props.handle()
+  this.props.handle({successedClicks,level,delay,countClickLevel});
 }
 _renderBlocks() {
   let colored = Math.floor(Math.random() * this.props.max + this.props.min);
@@ -43,7 +41,6 @@ _renderBlocks() {
     for(let i = this.props.min; i <= this.props.max; i++) {
       if (i == colored) {
         blocks.push(<Block  key={i} handler={this.handleLevel} color={"red"}/>);
-
       } else {
         blocks.push(<Block key={i} />);
       }
@@ -59,11 +56,10 @@ render() {
         <div style={{width: "50%"}}>
           {blocks}
         </div>
-
-     </div>
-     <div className="result">
-       <TableInfo />
-     </div>
+      </div>
+    <div className="result">
+      <TableInfo />
+      </div>
      </div>
     );
   }
@@ -72,18 +68,17 @@ render() {
 function mapStateToProps(state) {
 
   return {
-      successClicks: state.app.successedClicks,
+      successedClicks: state.app.successedClicks,
       level: state.app.level,
       delay: state.app.delay,
       countClickLevel: state.app.countClickLevel
   }
-
 }
+
 function mapDispatchToProps(dispatch) {
   return {
-    handle: () => dispatch(success())
+    handle: (app) => dispatch(success(app))
   }
-
 }
 
 export default connect(mapStateToProps,mapDispatchToProps)(App);

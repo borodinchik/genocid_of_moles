@@ -1,9 +1,9 @@
 
-export const success = () => {
+export const success = (app) => {
 
   return {
     type: 'SUCCESS_CLICK',
-    payload:{}
+    payload:{app}
   };
 }
 export default success;
