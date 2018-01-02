@@ -15,7 +15,7 @@ export default function (state = initialState, action) {
       return {...state,
         level: state.level + 1,
         successedClicks: state.successedClicks = 0,
-        delay: state.delay - 1000
+        delay: state.delay * 1 - 1000
           };
     case 'END_GAME':
       return {

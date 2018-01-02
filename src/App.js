@@ -25,6 +25,7 @@ componentDidMount(){
   setInterval(() => {
     this.setState({key:this.state.key + 1})
   },this.props.delay);
+
 }
 
 handleLevel = () => {
