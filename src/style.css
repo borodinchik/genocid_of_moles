@@ -2,6 +2,11 @@
   display: flex;
   justify-content: center;
 }
+
 h3{
   margin: 0 auto;
+}
+
+.result {
+  text-align: center;
 }

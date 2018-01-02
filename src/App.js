@@ -18,7 +18,7 @@ class App extends Component {
 
 static defaultProps = {
     min: 0,
-    max: 5
+    max: 11
   }
 
 componentDidMount(){
