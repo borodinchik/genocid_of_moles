@@ -11,10 +11,10 @@ import './style.css';
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      key : 0,
-    };
-  }
+  this.state = {
+    key : 0,
+  };
+}
 
 static defaultProps = {
     min: 0,
@@ -29,7 +29,7 @@ componentDidMount(){
 
 handleLevel = () => {
   let {successedClicks,level,delay,countClickLevel} = this.props;
-    if (successedClicks >= 9) {
+    if (successedClicks >= 10) {
         this.props.lvlSuccess({level,delay});
         return;
       }
@@ -39,23 +39,20 @@ handleLevel = () => {
 _renderBlocks() {
   let colored = Math.floor(Math.random() * this.props.max + this.props.min);
   let blocks = [];
-
-    for(let i = this.props.min; i <= this.props.max; i++) {
-
-      if (i == colored) {
-        blocks.push(<Block  key={i} handler={this.handleLevel} color={"red"}/>);
-      } else {
-        blocks.push(<Block key={i} />);
-      }
+  for(let i = this.props.min; i <= this.props.max; i++) {
+    if (i == colored) {
+      blocks.push(<Block  key={i} handler={this.handleLevel} color={"red"}/>);
+    } else {
+      blocks.push(<Block key={i} />);
     }
-    return blocks;
   }
+  return blocks;
+}
 
 render() {
   let blocks = this._renderBlocks();
-
   return (
-      <div>
+    <div>
       <div className="container right">
         <div style={{width: "50%"}}>
           {blocks}
@@ -70,7 +67,6 @@ render() {
 }
 
 function mapStateToProps(state) {
-
   return {
       successedClicks: state.app.successedClicks,
       level: state.app.level,
