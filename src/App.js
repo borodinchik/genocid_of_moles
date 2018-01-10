@@ -5,6 +5,7 @@ import Block from './Block';
 import { success } from './actions/index';
 import { successLevel } from './actions/successLevel';//successLevel
 import { end } from './actions/EndGame';
+import{ drop } from './actions/DropLife';
 import TableInfo from './components/TableInfo';
 import './style.css';
 
@@ -18,16 +19,20 @@ class App extends Component {
 
 static defaultProps = {
     min: 0,
-    max: 11
+    max: 5
   }
 
 componentDidMount(){
   setInterval(() => {
     this.setState({key:this.state.key + 1})
   },this.props.delay);
-
 }
 
+dropLife = () => {
+  if (this.props.drops) {
+
+  }
+}
 handleLevel = () => {
   let {successedClicks,level,delay,countClickLevel} = this.props;
     if (successedClicks >= 10) {
@@ -44,7 +49,7 @@ _renderBlocks() {
     if (i == colored) {
       blocks.push(<Block  key={i} handler={this.handleLevel} color={"red"}/>);
     } else {
-      blocks.push(<Block key={i} />);
+      blocks.push(<Block key={i} handler={this.dropLife}  />);
     }
   }
   return blocks;
@@ -59,10 +64,10 @@ render() {
           {blocks}
         </div>
       </div>
-    <div className="result">
-      <TableInfo />
+<div className="result">
+  <TableInfo />
+</div>
       </div>
-     </div>
     );
   }
 }
@@ -72,15 +77,18 @@ function mapStateToProps(state) {
       successedClicks: state.app.successedClicks,
       level: state.app.level,
       delay: state.app.delay,
-      countClickLevel: state.app.countClickLevel
+      countClickLevel: state.app.countClickLevel,
+      drop: state.app.drop
   }
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    handle: (app) => dispatch(success(app)),
-    lvlSuccess: (app) => dispatch(successLevel(app)),
-    end: () =>  dispatch(end())
+    handle: () => dispatch(success()),
+    lvlSuccess: () => dispatch(successLevel()),
+    drops: () => dispatch(drop()),
+    end: () =>  dispatch(end()),
+
   }
 }
 export default connect(mapStateToProps,mapDispatchToProps)(App);

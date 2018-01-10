@@ -2,6 +2,7 @@ const initialState = {
   successedClicks: 0,
   level: 1,
   delay: 4000,
+  drop: 3
 };
 
 export default function (state = initialState, action) {
@@ -21,6 +22,11 @@ export default function (state = initialState, action) {
       return {
         ...state, level: state.level = 1,
         delay: state.delay
+      };
+      case 'DROP_LIFE':
+      return {
+        ...state,
+        drop: state.drop - 1
       };
       default:
       return state;
